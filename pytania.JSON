@@ -1,0 +1,14 @@
+{
+  "Czy Steve Jobs stworzyl system DOS?" : "Nie",
+  "Czy system Windows bazuje na systemie DOS?" : "Tak",
+  "Czy tworcy PyCharm pochodza z Czech?": "Tak",
+  "Czy procesor Apple M1 natynie uruchamia aplikacje pisane dla procesorow x86?": "Nie",
+  "Google robi opony" : "Nie",
+  "Unity Technologies dostarcza na rynek rozwiazanie Unreal Engine?": "Nie",
+  "Python to waz i jezyk programowania?" : "Tak",
+  "Swift to jezyk stworzony przez Apple" : "Tak",
+  "Kotlin to jezyk stworzony przez Apple" : "Nie",
+  "Kotlin to jezyk stworzony przez Google" : "Tak",
+  "C# to jezyk stworzony przez Microsoft" : "Tak",
+  "Czy JDK to Java Developer Kit?" : "Tak"
+}
