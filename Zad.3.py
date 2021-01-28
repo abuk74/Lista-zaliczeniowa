@@ -28,7 +28,7 @@ def WylosujPytanie(pytania):
 
 
 
-def QuizMain(pytaniaJSON):
+def Main(pytaniaJSON):
     text = open(pytaniaJSON, "r").read()
     pytania = json.loads(text)
     punkty = 0
@@ -41,4 +41,4 @@ def QuizMain(pytaniaJSON):
             punkty += 1
     print(f"Twoja ocena: {Ocena(punkty)}")
 
-QuizMain("pytania.JSON")
+Main("pytania.JSON")
