@@ -1,7 +1,6 @@
 import json
 import random
 
-
 def Ocena(punkty):
     if punkty < 2:
         return "niedostateczny"
@@ -15,7 +14,6 @@ def Ocena(punkty):
         return "bardzo dobry"
     else:
         return "celujacy"
-
 
 def Main(pytaniaJSON):
     text = open(pytaniaJSON, "r").read()
