@@ -2,102 +2,100 @@
 #Bazuje na:
 #https://stackoverflow.com/questions/2192533/function-to-return-date-of-easter-for-the-given-year
 #https://dateutil.readthedocs.io/en/stable/_modules/dateutil/easter.html
-
-import datetime
+#https://mattomatti.com/pl/a0041
 
 def Main():
     print("Podaj date:")
     dzien = int(input("Podaj dzien"))
     miesiac = int(input("Podaj miesiac"))
     rok = int(input("Podaj rok"))
-    data(dzien, miesiac, rok)
 
+    print("Podaj date urodzenia:")
+    dzienUrodzin = int(input("Podaj dzien urodzenia"))
+    miesiacUrodzin = int(input("Podaj miesiac urodzenia"))
+    rokUrodzin = int(input("Podaj rok urodzenia"))
 
-def data(D, M, R):
-    wczoraj = data_wczoraj(D, M, R)
-    print(f"Wczoraj bylo: {wczoraj}")
-    jutro = data_jutro(D, M, R)
-    print(f"Jutro bedzie: {jutro}")
-    w = Easter(R)
-    print(f"Wielkanoc wypada w: {w}")
+    print("Wielkanoc wypada w: ", Wielkanoc(rok))
+    print("Wczoraj bylo: ", Wczoraj(dzien, miesiac, rok))
+    print("Jutro bedzie:", Jutro(dzien, miesiac, rok))
+
     dni = ["pon", "wt", "sr", "czw", "pt", "so", "nd"]
-    nr_dnia = dzien_tygodnia(D, M, R)
-    print(f"Dzien tygodnia: {dni[nr_dnia]}")
+    nrDnia = Dzien(dzien, miesiac, rok)
+    print("Dzien tygodnia: ", dni[nrDnia])
 
+    DzienUrodzin(dzienUrodzin, miesiacUrodzin, rokUrodzin)
 
-def czy_przestepny(R): #Rok przestępny jest raz na 4 lata ( W 2016, 2020 , 2024 itp )
-    if R % 4 == 0 and R % 100 != 0:
+def Wielkanoc(y):
+    a = y % 19
+    b = y % 4
+    c = y % 7
+    d = (19*a + 24) % 30
+    e = (2*b+4*c+6*d+5) % 7
+    marzec = 22 + d + e
+    kwiecien = d + e - 9
+    if marzec > 31:
+        return kwiecien, 4, y
+    else:
+        return marzec, 3, y
+
+def Wczoraj(dzien, miesiac, rok):
+    miesiace = Miesiac(rok)
+    nowyRok = rok
+    nowyMiesiac = miesiac
+    nowyDzien = dzien - 1
+    if nowyDzien == 0:
+        nowyMiesiac = miesiac - 1
+        if nowyMiesiac == 0:
+            nowyRok = rok - 1
+            nowyMiesiac = 12
+            nowyDzien = 31
+        else:
+            nowyDzien = miesiace[nowyMiesiac-1]
+    return nowyDzien, nowyMiesiac, nowyRok
+
+def Przestepny(rok):
+    if rok % 4 == 0 and rok % 100 != 0:
         return True
-    elif R % 400 == 0:
+    elif rok % 400 == 0:
         return True
     else:
         return False
 
 
-#Latami przestępnymi są te, których numeracja jest podzielna przez 4 i niepodzielna przez 100 lub jest podzielna przez 400.
-def pobierz_miesiace(R):
+def Miesiac(rok):
     luty = 28
-    if czy_przestepny(R):
+    if Przestepny(rok):
         luty = 29
     miesiace = [31, luty, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     return miesiace
 
 
-def data_wczoraj(D, M, R):
-    miesiace = pobierz_miesiace(R)
-    nowy_rok = R
-    nowy_miesiac = M
-    nowy_dzien = D - 1 #przesuwamy sie o jeden dzien do tylu
-    if nowy_dzien == 0: #jesli mamny np 1 stycznia to przechodzimy na poprzedni miesiac (a nawet rok)
-        nowy_miesiac = M - 1 #przesuwamy sie na poprzedni miesiac
-        if nowy_miesiac == 0: #przesuwamy sie na poprzedni rok
-            nowy_rok = R - 1
-            nowy_miesiac = 12
-            nowy_dzien = 31
-        else:
-            nowy_dzien = miesiace[nowy_miesiac-1]
-    return nowy_dzien, nowy_miesiac, nowy_rok
+def Jutro(dzien, miesiac, rok):
+    miesiace = Miesiac(rok)
+    nowyRok = rok
+    nowyMiesiac = miesiac
+    nowyDzien = dzien + 1
+    if nowyDzien > miesiace[miesiac - 1]:
+        nowyMiesiac = miesiac + 1
+        if nowyMiesiac > 12:
+            nowyRok = rok + 1
+            nowyMiesiac = 1
+        nowyDzien = 1
+    return nowyDzien, nowyMiesiac, nowyRok
 
+def Dzien(dzien, miesiac, rok):
+    miesiace = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
+    q = (rok - 1) // 4 - (rok - 1)//100 + (rok - 1)//400
+    p = (rok - 1) + q
+    p += miesiace[miesiac - 1]
+    if miesiac > 2 and Przestepny(rok):
+        p += 1
+    p += dzien - 1
+    return p % 7
 
-def data_jutro(D, M, R):
-    miesiace = pobierz_miesiace(R)
-    nowy_rok = R
-    nowy_miesiac = M
-    nowy_dzien = D + 1
-    if nowy_dzien > miesiace[M - 1]:
-        nowy_miesiac = M + 1
-        if nowy_miesiac > 12:
-            nowy_rok = R + 1
-            nowy_miesiac = 1
-        nowy_dzien = 1
-    return nowy_dzien, nowy_miesiac, nowy_rok
+def DzienUrodzin(dzien, miesiac, rok):
+    dni = ["pon", "wt", "sr", "czw", "pt", "so", "nd"]
+    nrDnia = Dzien(dzien, miesiac, rok)
+    print("Dzien urodznia: ", dni[nrDnia])
 
-def Easter(year, method=3): # 3 to kalendarz gregorianski
-
-    if not (1 <= method <= 3):
-        raise ValueError("invalid method")
-
-    # g - Golden year - 1
-    # c - Century
-    # h - (23 - Epact) mod 30
-    # i - Number of days from March 21 to Paschal Full Moon
-    # j - Weekday for PFM (0=Sunday, etc)
-    # p - Number of days from March 21 to Sunday on or before PFM
-    #     (-6 to 28 methods 1 & 3, to 56 for method 2)
-    # e - Extra days to add for method 2 (converting Julian
-    #     date to Gregorian date)
-
-    y = year
-    g = y % 19
-    e = 0
-    c = y//100
-    h = (c - c//4 - (8*c + 13)//25 + 19*g + 15) % 30
-    i = h - (h//28)*(1 - (h//28)*(29//(h + 1))*((21 - g)//11))
-    j = (y + y//4 + i + 2 - c + c//4) % 7
-
-    # p can be from -6 to 56 corresponding to dates 22 March to 23 May
-    # (later dates apply to method 2, although 23 May never actually occurs)
-    p = i - j + e
-    d = 1 + (p + 27 + (p + 6)//40) % 31
-    m = 3 + (p + 26)//30
-    return datetime.date(int(y), int(m), int(d))
+Main()
