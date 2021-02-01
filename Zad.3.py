@@ -17,24 +17,13 @@ def Ocena(punkty):
     else:
         return "celujacy"
 
-def WylosujPytanie(pytania):
-    nrPytania = random.randint(0, len(pytania) - 1)
-    #del pytania[nrPytania]
-    j = 0
-    for pytanie, odp in pytania.items():
-        if j == nrPytania:
-            return pytanie, odp
-        j += 1
-
-
 
 def Main(pytaniaJSON):
     text = open(pytaniaJSON, "r").read()
     pytania = json.loads(text)
     punkty = 0
-
-    for i in range(10):
-        pytanie, odp = WylosujPytanie(pytania)
+    pytania = random.sample(pytania.items(), 10)
+    for pytanie, odp in pytania:
         print(pytanie)
         odpowiedz = input("Tak/Nie")
         if odpowiedz == odp:
