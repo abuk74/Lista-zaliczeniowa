@@ -23,4 +23,4 @@ def ObliczNetto(brutto):
 
 
 kwota = float(input("Podaj kwote brutto: "))
-print(f"Kwota netto wynosi: {ObliczNetto(kwota)}")
+print("Kwota netto wynosi: ", ObliczNetto(kwota))

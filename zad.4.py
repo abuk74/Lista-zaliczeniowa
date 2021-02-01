@@ -6,4 +6,4 @@ def PrawdziwaPojemnosc(pojemnoscWedlugProducenta):
 
 
 gb = float(input("Podaj rozmiar w GB"))
-print(f"Faktyczny rozmiar: {PrawdziwaPojemnosc(gb)} GB")
+print("Faktyczny rozmiar w GB wynosi: ", PrawdziwaPojemnosc(gb))

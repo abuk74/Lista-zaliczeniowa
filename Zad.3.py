@@ -39,6 +39,6 @@ def Main(pytaniaJSON):
         odpowiedz = input("Tak/Nie")
         if odpowiedz == odp:
             punkty += 1
-    print(f"Twoja ocena: {Ocena(punkty)}")
+    print("Twoja ocena: ", Ocena(punkty))
 
 Main("pytania.JSON")

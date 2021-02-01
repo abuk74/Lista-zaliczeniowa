@@ -1,9 +1,9 @@
 #https://smeo.pl/blog/rozwoj-biznesu/koszty-pracodawcy-w-5-krokach/
 
 def Main():
-    brutto = float(input("Podaj kwotę brutto: "))
-    print(f"Lacznie pracodawca wydal na Ciebie: {KosztPracodawcy(brutto)}zl")
-    print(f"Zarabiasz netto: {ObliczNetto(brutto)} zł")
+    brutto = float(input("Podaj kwotę bruttow PLN: "))
+    print("Lacznie pracodawca wydal na Ciebie: ", KosztPracodawcy(brutto))
+    print("Zarabiasz netto: ", ObliczNetto(brutto))
 
 def ObliczNetto(brutto):
     emerytalna = 0.0976 * brutto
