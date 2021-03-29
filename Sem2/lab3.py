@@ -1,5 +1,5 @@
 class Restaurant:
-    def __init__(self, nazwa, NIP, REGON, adres, specjalizacja, wielkoscLokalu, iloscStolikow, iloscPracownikow, oferujeDowoz)
+    def __init__(self, nazwa, NIP, REGON, adres, specjalizacja, wielkoscLokalu, iloscStolikow, iloscPracownikow, oferujeDowoz):
         self.nazwa = nazwa
         self.NIP = NIP
         self.REGON = REGON
@@ -31,39 +31,36 @@ class IceCreamStand(Restaurant):
 
 class CoffeShop(Restaurant):
     coffeTypes = ["latte", "americano", "cappuccino", "flatWhite", "mocca", "latteMacchiato", "espresso"]
-    def __init__(self, coffeType)
+    def __init__(self, coffeTypes):
         super().__init__()
-        self.coffeType = coffeType
-    def AddCofeeType():
+        self.coffeTypes = coffeTypes
+    def AddCofeeType(self):
         newCoffe = input("Podaj nazwe nowej kawy")
-        exists = false
-        for item in coffeTypes:
+        exists = False
+        for item in CoffeShop.coffeTypes:
             if newCoffe == item:
-                exists = true
-        if !exists:
-            coffeTypes.append(newCoffe)
-    def availableCoffes():
-        for items in coffeTypes:
-            print("Dostępne kawy:")
-            print items
-    def orderCoffe():
-        print availableCoffes
+                exists = True
+        if exists == False:
+            CoffeShop.coffeTypes.append(newCoffe)
+    def availableCoffes(self):
+        for items in CoffeShop.coffeTypes:
+            print (items)
+    def orderCoffe(self):
+        print (CoffeShop.availableCoffes())
         order = input("Wybierz kawę: ")
-        if order in coffeTypes:
+        if order in CoffeShop.coffeTypes:
             addEspresso = input(("Wzmocnić kawę dodatkowym espresso?"))
             if addEspresso.upper() == "TAK":
-                print(order " + double espresso")
+                print(order + "double espresso")
+            elif addEspresso.upper() == "NIE":
+                print(order)
             else:
-                print (order)
-        else:
-            print("Nie posiadamy takiej kawy :c")
-
-
+                print("Nie posiadamy takiej kawy :c")
 
 class Main:
     lokalneRestauracje = []
-    def AddRestaurant():
+    def AddRestaurant(self):
         newRestaurant = input("Podaj nazwe nowej restauracji")
-        lokalneRestauracje.append(newRestaurant)
-    def ShowLocalRestaurants():
-        print(lokalneRestauracje)
+        Main.lokalneRestauracje.append(newRestaurant)
+    def ShowLocalRestaurants(self):
+        print(Main.lokalneRestauracje)
