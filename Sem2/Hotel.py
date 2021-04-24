@@ -18,7 +18,18 @@ class Hotel:
             self.floors.append(newFloor)
             self.numberOfRooms += newFloor.numberOfRooms
         print("Kreator zakończył prace")
-
+    def AvailableRooms(self):
+        availableRooms = 0
+        for i in range(0, self.numberOfFloors):
+            for j in range(0, len(self.floors[i].rooms)):
+                if self.floors[i].rooms[j].empty == True:
+                    print(f"Na piętrze {i} jest wolny pokój {j}")
+                    availableRooms += 1
+        print(f"Jest {availableRooms} wolnych pokoi")
+    def Rent(self, floor, roomNumber, person):
+        self.floors[floor].rooms[roomNumber].empty = False
+        self.floors[floor].rooms[roomNumber].rentedBy = person
+        print(f"Wynajęto pokój {roomNumber} na piętrze {floor} osobie: {person.name} {person.surname}")
 
 
 class Room:
@@ -27,6 +38,8 @@ class Room:
         self.roomNumber = roomNumber
         self.beds = beds
         self.empty = empty
+        self.rentedBy = Person
+
 class Floor:
     def __init__(self, floor):
         self.floor = floor
@@ -47,7 +60,13 @@ class Floor:
         self.numberOfRooms += 1
         self.rooms.append(newRoom)
 
-
+class Person:
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
 
 
 barak = Hotel("Barak")
+barak.AvailableRooms()
+kowalski = Person("Jan", "Kowalski")
+barak.Rent(0, 0, kowalski)
