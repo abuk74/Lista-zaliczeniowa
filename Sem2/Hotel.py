@@ -13,10 +13,11 @@ class Hotel:
         time.sleep(1)
         numberOfFloors = int(input("Podaj liczbę pięter: "))
         self.numberOfFloors = numberOfFloors
-        for i in numberOfFloors:
+        for i in range(numberOfFloors):
             newFloor = Floor(i)
             self.floors.append(newFloor)
             self.numberOfRooms += newFloor.numberOfRooms
+        print("Kreator zakończył prace")
 
 
 
@@ -45,3 +46,8 @@ class Floor:
         newRoom = Room(floor, roomNumber, beds, True)
         self.numberOfRooms += 1
         self.rooms.append(newRoom)
+
+
+
+
+barak = Hotel("Barak")
