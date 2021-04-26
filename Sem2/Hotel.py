@@ -30,7 +30,8 @@ class Hotel:
         self.floors[floor].rooms[roomNumber].empty = False
         self.floors[floor].rooms[roomNumber].rentedBy = person
         print(f"Wynajęto pokój {roomNumber} na piętrze {floor} osobie: {person.name} {person.surname}")
-
+    def __del__(self):
+        print("Wywołanie destruktora!")
 
 class Room:
     def __init__(self, floor, roomNumber, beds, empty):

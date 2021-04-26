@@ -64,3 +64,6 @@ class Main:
         Main.lokalneRestauracje.append(newRestaurant)
     def ShowLocalRestaurants(self):
         print(Main.lokalneRestauracje)
+
+
+saddas = IceCreamStand("sda", 1231, 1133,)
