@@ -1,0 +1,5 @@
+Wyniki dzia?a? algorytmu:
+50 randomowych liczb: 9.199999999999486e-05
+100 randomowych liczb: 0.00016730000000000217
+150 randomowych liczb: 0.0002566999999999986
+50 liczb z pliku txt: 0.00017069999999999586
